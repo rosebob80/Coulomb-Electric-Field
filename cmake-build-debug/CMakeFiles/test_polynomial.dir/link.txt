@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/test_polynomial.dir/tests/test_polynomial.cpp.o  -o test_polynomial  -Wl,-rpath,/home/long/Desktop/electric-field-visualization/cmake-build-debug libbugs.so /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1 -lm -lcppunit -lgomp -lpthread 

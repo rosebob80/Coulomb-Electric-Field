@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libElectricfield.so -o libElectricfield.so CMakeFiles/Electricfield.dir/src/Common.cpp.o CMakeFiles/Electricfield.dir/src/Exception.cpp.o 
