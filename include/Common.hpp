@@ -23,17 +23,10 @@ typedef float fpt;
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 
 typedef struct Config {
-    fpt centerX;
-    fpt centerY;
-    fpt xTick;
-    fpt yTick;
-    fpt gridSize;
-    int32_t sample;
-    fpt radius;
 } Config;
 
 /* Maths */
-#define PI                  3.14159265
+#define PI                  3.14159265359
 #define RAD2DEG(x)          ((x)/PI*180)
 #define DEG2RAD(x)          ((x)*PI/180)
 #define ALIGNB(x, align)    (((x) + ((align) - 1)) & ~((align) - 1))
@@ -82,13 +75,16 @@ typedef struct Config {
 #define STR(s)              STR2(s)
 #define CAT(str1,str2)      (str1 "" str2)
 
-
 std::ostream &operator<<(std::ostream &os, const sf::Vector2f &vector);
 
-sf::Vector2f operator+(const sf::Vector2f& lhs, fpt scalar);
+fpt norm(const sf::Vector2<fpt>& lhs);
 
-sf::Vector2f operator-(const sf::Vector2f& lhs, fpt scalar);
+sf::Vector2<fpt> unit(const sf::Vector2<fpt>& lhs);
 
-sf::Vector2f operator/(const sf::Vector2f& lhs, fpt scalar);
+sf::Vector2<fpt> operator+(const sf::Vector2<fpt>& lhs, fpt scalar);
 
-sf::Vector2f operator*(const sf::Vector2f& lhs, fpt scalar);
+sf::Vector2<fpt> operator-(const sf::Vector2<fpt>& lhs, fpt scalar);
+
+sf::Vector2<fpt> operator/(const sf::Vector2<fpt>& lhs, fpt scalar);
+
+sf::Vector2<fpt> operator*(const sf::Vector2<fpt>& lhs, fpt scalar);
