@@ -12,6 +12,9 @@ inline uint64_t timeSinceEpochMs() {
     return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
 }
 
+const static sf::Color negativeColor{0, 0, 255, 175};
+const static sf::Color positiveColor{255, 0, 0, 175};
+
 class ChargedParticle {
 private:
     sf::Vector2<fpt> p;

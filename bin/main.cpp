@@ -4,7 +4,7 @@
 #include <Field.hpp>
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Probeladung", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Coulomb Electrostatic", sf::Style::Default);
     window.setFramerateLimit(60);
 
     tgui::GuiSFML gui{window};

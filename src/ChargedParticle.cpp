@@ -86,13 +86,13 @@ void ChargedParticle::draw(sf::RenderWindow *window) {
     circle.setPosition(this->p - radius / 2);
 
     if (this->q < 0) {
-        circle.setFillColor(sf::Color::Blue);
+        circle.setFillColor(negativeColor);
     } else if (this->q == 0) {
         circle.setFillColor(sf::Color::White);
         circle.setOutlineColor(sf::Color::Black);
         circle.setOutlineThickness(1);
     } else {
-        circle.setFillColor(sf::Color::Red);
+        circle.setFillColor(positiveColor);
     }
 
     window->draw(circle);

@@ -22,6 +22,7 @@ private:
     FPS fps;
     uint64_t lastAdded = 0;
     VectorField vectorField;
+    tgui::CheckBox::Ptr showLines;
     tgui::CheckBox::Ptr addMobile;
     tgui::Slider::Ptr charge;
     tgui::Label::Ptr chargeLabel;

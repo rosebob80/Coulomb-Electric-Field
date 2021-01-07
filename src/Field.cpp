@@ -1,10 +1,14 @@
 #include "Field.hpp"
 
 Field::Field(sf::Font *font, sf::RenderWindow *window, tgui::GuiSFML *gui) : font(font), window(window), gui(gui) {
+    showLines = tgui::CheckBox::create();
+    showLines->setText("Show line");
+    showLines->setPosition(5, WINDOW_HEIGHT - 190);
+    showLines->setChecked(false);
+
     addMobile = tgui::CheckBox::create();
     addMobile->setText("Moveable");
     addMobile->setPosition(5, WINDOW_HEIGHT - 150);
-    addMobile->setChecked(true);
 
     chargeLabel = tgui::Label::create("Charge (-1 - 1)");
     chargeLabel->setPosition(5, WINDOW_HEIGHT - 110);
@@ -22,6 +26,7 @@ Field::Field(sf::Font *font, sf::RenderWindow *window, tgui::GuiSFML *gui) : fon
     mass->setHeight(10);
     mass->setValue(20000);
 
+    gui->add(showLines);
     gui->add(addMobile);
     gui->add(chargeLabel);
     gui->add(charge);
@@ -66,7 +71,9 @@ void Field::update() {
     }
 
     window->clear(sf::Color::White);
-    this->vectorField.draw(window, this->particles);
+    if(this->showLines->isChecked()) {
+        this->vectorField.draw(window, this->particles);
+    }
     this->drawParticles();
     this->drawFPS();
     gui->draw();
