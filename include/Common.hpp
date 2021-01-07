@@ -3,7 +3,7 @@
 #include <cmath>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
+#include <chrono>
 #define WINDOW_WIDTH 1000
 
 #define WINDOW_HEIGHT 1000
@@ -21,9 +21,6 @@ typedef float fpt;
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
-
-typedef struct Config {
-} Config;
 
 /* Maths */
 #define PI                  3.14159265359
@@ -77,14 +74,51 @@ typedef struct Config {
 
 std::ostream &operator<<(std::ostream &os, const sf::Vector2f &vector);
 
-fpt norm(const sf::Vector2<fpt>& lhs);
+inline fpt norm(const sf::Vector2<fpt>& lhs) {
+    return std::sqrt(std::pow(lhs.x, 2) + std::pow(lhs.y, 2));
+}
 
-sf::Vector2<fpt> unit(const sf::Vector2<fpt>& lhs);
+inline sf::Vector2<fpt> unit(const sf::Vector2<fpt>& lhs) {
+    return lhs / norm(lhs);
+}
 
-sf::Vector2<fpt> operator+(const sf::Vector2<fpt>& lhs, fpt scalar);
+inline std::ostream &operator<<(std::ostream &os, const sf::Vector2<fpt> &vector) {
+    os << "[x = " << vector.x << ", y = " << vector.y << "]";
+    return os;
+}
 
-sf::Vector2<fpt> operator-(const sf::Vector2<fpt>& lhs, fpt scalar);
+inline sf::Vector2<fpt> operator+(const sf::Vector2<fpt> &lhs, fpt scalar) {
+    sf::Vector2<fpt> ret(lhs);
+    ret.x += scalar;
+    ret.y += scalar;
+    return ret;
+}
 
-sf::Vector2<fpt> operator/(const sf::Vector2<fpt>& lhs, fpt scalar);
+inline sf::Vector2<fpt> operator-(const sf::Vector2<fpt> &lhs, fpt scalar) {
+    sf::Vector2<fpt> ret(lhs);
+    ret.x -= scalar;
+    ret.y -= scalar;
+    return ret;
+}
 
-sf::Vector2<fpt> operator*(const sf::Vector2<fpt>& lhs, fpt scalar);
+inline sf::Vector2<fpt> operator/(const sf::Vector2<fpt> &lhs, fpt scalar) {
+    sf::Vector2<fpt> ret(lhs);
+    ret.x /= scalar;
+    ret.y /= scalar;
+    return ret;
+}
+
+inline sf::Vector2<fpt> operator*(const sf::Vector2<fpt> &lhs, fpt scalar) {
+    sf::Vector2<fpt> ret(lhs);
+    ret.x *= scalar;
+    ret.y *= scalar;
+    return ret;
+}
+
+inline void mirrorVertical(sf::Vector2<fpt>& lhs) {
+    lhs.y = -lhs.y;
+}
+
+inline void mirrorHorizontal(sf::Vector2<fpt>& lhs) {
+    lhs.x = -lhs.x;
+}

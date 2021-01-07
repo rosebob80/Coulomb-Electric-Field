@@ -10,7 +10,20 @@ find_package(OpenMP)
 find_library(LIB_CPPUNIT cppunit)
 find_package(TGUI 0.9.0 REQUIRED)
 
-INCLUDE_DIRECTORIES ( "${EIGEN3_INCLUDE_DIR}" )
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+
+if (OPENMP_FOUND)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+else ()
+    message("Can not find OMP")
+endif ()
+
+INCLUDE_DIRECTORIES("${EIGEN3_INCLUDE_DIR}")
 
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
@@ -49,7 +62,7 @@ foreach (file ${test_files})
 
     add_executable(${file_name} ${file})
 
-    target_link_libraries(${file_name} ${PROJECT_NAME} ${SFML_LIBRARIES} ${SFML_DEPENDENCIES} ${PROJECT_NAME} ${TGUI_LIBRARY} sfml-graphics sfml-window sfml-system Eigen3::Eigen m OpenMP::OpenMP_CXX cppunit)
+    target_link_libraries(${file_name} ${PROJECT_NAME} ${SFML_LIBRARIES} ${SFML_DEPENDENCIES} ${PROJECT_NAME} ${TGUI_LIBRARY} tgui sfml-graphics sfml-window sfml-system Eigen3::Eigen m OpenMP::OpenMP_CXX cppunit)
 endforeach ()
 
 # Copy resource files from from data to build directory

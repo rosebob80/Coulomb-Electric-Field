@@ -7,22 +7,30 @@
 #include <omp.h>
 #include "ChargedParticle.hpp"
 #include "Common.hpp"
+#include "FPS.hpp"
 
 class Field {
 private:
     std::vector<ChargedParticle> particles;
     sf::Font *font;
     sf::RenderWindow *window;
-    Config *config;
     tgui::GuiSFML *gui;
     fpt timeElapsed{};
     sf::Clock clock{};
     sf::Event event{};
+    FPS fps;
+    uint64_t lastAdded = 0;
+    tgui::CheckBox::Ptr addMobile;
+    tgui::Slider::Ptr charge;
+    tgui::Label::Ptr chargeLabel;
+    tgui::Slider::Ptr mass;
+    tgui::Label::Ptr massLabel;
 protected:
     void drawParticles();
 
+    void drawFPS();
 public:
-    Field(sf::Font *font, sf::RenderWindow *window, Config *config, tgui::GuiSFML *gui);
+    Field(sf::Font *font, sf::RenderWindow *window, tgui::GuiSFML *gui);
 
     void update();
 

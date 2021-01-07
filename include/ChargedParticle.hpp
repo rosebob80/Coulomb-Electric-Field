@@ -2,10 +2,15 @@
 
 #include <SFML/Graphics.hpp>
 #include <ostream>
+#include <sstream>
 #include "Common.hpp"
 
 #define COULOMB_CONSTANT 0.000000000008854187812813
-#define FRICTION
+
+inline uint64_t timeSinceEpochMs() {
+    using namespace std::chrono;
+    return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+}
 
 class ChargedParticle {
 private:
@@ -14,13 +19,14 @@ private:
     fpt q{};
     fpt m{};
     bool mobile{};
+    sf::Font * font;
 
 public:
     ChargedParticle(const sf::Vector2<fpt> &p, const sf::Vector2<fpt> &v, fpt q, fpt m, bool mobile);
 
-    [[nodiscard]] sf::Vector2<fpt> coulombForce(const std::vector<ChargedParticle> &particles) const;
+    ChargedParticle(const sf::Vector2<fpt> &p, const sf::Vector2<fpt> &v, fpt q, fpt m, bool mobile, sf::Font * font);
 
-    [[nodiscard]] fpt potential(const sf::Vector2<fpt>& r) const;
+    [[nodiscard]] sf::Vector2<fpt> coulombForce(const std::vector<ChargedParticle> &particles) const;
 
     void updatePosition(const sf::Vector2<fpt>& coulomb, fpt deltaT);
 
