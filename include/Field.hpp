@@ -6,6 +6,7 @@
 #include <TGUI/TGUI.hpp>
 #include <omp.h>
 #include "ChargedParticle.hpp"
+#include "VectorField.hpp"
 #include "Common.hpp"
 #include "FPS.hpp"
 
@@ -20,6 +21,7 @@ private:
     sf::Event event{};
     FPS fps;
     uint64_t lastAdded = 0;
+    VectorField vectorField;
     tgui::CheckBox::Ptr addMobile;
     tgui::Slider::Ptr charge;
     tgui::Label::Ptr chargeLabel;

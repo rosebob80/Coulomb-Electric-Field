@@ -32,6 +32,8 @@ public:
 
     void draw(sf::RenderWindow * window);
 
+    const sf::Vector2<fpt> &getP() const;
+
     bool operator==(const ChargedParticle &rhs) const;
 
     bool operator!=(const ChargedParticle &rhs) const;

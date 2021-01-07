@@ -66,9 +66,10 @@ void Field::update() {
     }
 
     window->clear(sf::Color::White);
+    this->vectorField.draw(window, this->particles);
     this->drawParticles();
-    gui->draw();
     this->drawFPS();
+    gui->draw();
     window->display();
 }
 

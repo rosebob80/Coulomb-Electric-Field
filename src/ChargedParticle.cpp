@@ -112,3 +112,7 @@ void ChargedParticle::draw(sf::RenderWindow *window) {
     fpsText.setFillColor(sf::Color::White);
     window->draw(fpsText);
 }
+
+const sf::Vector2<fpt> &ChargedParticle::getP() const {
+    return p;
+}
