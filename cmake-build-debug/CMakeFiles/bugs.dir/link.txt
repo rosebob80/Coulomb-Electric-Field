@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libbugs.so -o libbugs.so CMakeFiles/bugs.dir/src/Common.cpp.o CMakeFiles/bugs.dir/src/Exception.cpp.o CMakeFiles/bugs.dir/src/Graph.cpp.o CMakeFiles/bugs.dir/src/Polynomial.cpp.o 

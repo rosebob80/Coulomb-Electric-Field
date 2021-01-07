@@ -1,0 +1,4 @@
+/home/long/Desktop/electric-field-visualization/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/long/Desktop/electric-field-visualization/cmake-build-debug/CMakeFiles/main.dir
+/home/long/Desktop/electric-field-visualization/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/long/Desktop/electric-field-visualization/cmake-build-debug/CMakeFiles/Electricfield.dir
