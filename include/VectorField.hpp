@@ -6,7 +6,7 @@
 class VectorField {
 private:
     std::vector<sf::Vector2<fpt>> magnitude;
-    std::vector<ChargedParticle> positions;
+    std::vector<sf::Vector2<fpt>> positions;
     std::vector<sf::RectangleShape> lines;
 public:
     VectorField();

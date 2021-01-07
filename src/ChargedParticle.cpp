@@ -1,53 +1,53 @@
 #include "ChargedParticle.hpp"
 
-ChargedParticle::ChargedParticle(const sf::Vector2 <fpt> &p, const sf::Vector2 <fpt> &v, fpt q, fpt m, bool mobile) : p(
+ChargedParticle::ChargedParticle(const sf::Vector2<fpt> &p, const sf::Vector2<fpt> &v, fpt q, fpt m, bool mobile) : p(
         p), v(v), q(q), m(m), mobile(mobile) {}
 
 
-ChargedParticle::ChargedParticle(const sf::Vector2 <fpt> &p, const sf::Vector2 <fpt> &v, fpt q, fpt m, bool mobile,
+ChargedParticle::ChargedParticle(const sf::Vector2<fpt> &p, const sf::Vector2<fpt> &v, fpt q, fpt m, bool mobile,
                                  sf::Font *font) : p(
         p), v(v), q(q), m(m), mobile(mobile), font(font) {
 
 }
 
-sf::Vector2 <fpt> ChargedParticle::coulombForce(const std::vector <ChargedParticle> &particles) const {
-    sf::Vector2 <fpt> ret{0, 0};
+sf::Vector2<fpt> ChargedParticle::coulombForce(const std::vector<ChargedParticle> &particles) const {
+    sf::Vector2<fpt> ret{0, 0};
     for (const auto &that : particles) {
         if (that != *this) {
             auto diff = this->p - that.p;
 
-            if(diff.x < 0 && diff.x > -3) {
+            if (diff.x < 0 && diff.x > -3) {
                 diff.x = -3;
-            } else if(diff.x > 0 && diff.x < 3) {
+            } else if (diff.x > 0 && diff.x < 3) {
                 diff.x = 3;
             }
 
-            if(diff.y < 0 && diff.y > -3) {
+            if (diff.y < 0 && diff.y > -3) {
                 diff.y = -3;
-            } else if(diff.y > 0 && diff.y < 3) {
+            } else if (diff.y > 0 && diff.y < 3) {
                 diff.y = 3;
             }
-            ret += (unit(diff) / std::pow(norm(diff), 2.0))
-                   * ((that.q * this->q) / (4.0 * PI * COULOMB_CONSTANT));
+            ret += (unit(diff) / std::pow(norm(diff), 2.0)) * ((that.q * this->q));
         }
     }
+    ret = ret / (4.0 * PI * COULOMB_CONSTANT);
     return ret;
 }
 
-void ChargedParticle::updatePosition(const sf::Vector2 <fpt> &coulomb, fpt deltaT) {
+void ChargedParticle::updatePosition(const sf::Vector2<fpt> &coulomb, fpt deltaT) {
     if (this->mobile) {
         auto radius = MAX(MIN(std::abs(this->m), 10), 3);
 
         // Acceleration
-        sf::Vector2 <fpt> a = coulomb / this->m;
+        sf::Vector2<fpt> a = coulomb / this->m;
 
         // Speed
-        sf::Vector2 <fpt> deltaV = a * deltaT;
+        sf::Vector2<fpt> deltaV = a * deltaT;
         this->v += deltaV;
 
 
         // Position
-        sf::Vector2 <fpt> deltaS = this->v * deltaT;
+        sf::Vector2<fpt> deltaS = this->v * deltaT;
         this->p += deltaS;
 
         // Collision left or right
@@ -100,19 +100,15 @@ void ChargedParticle::draw(sf::RenderWindow *window) {
     std::stringstream ss;
     if (this->q < 0) {
         ss << "-";
-    } else if(this->q > 0) {
+    } else if (this->q > 0) {
         ss << "+";
     }
     sf::Text fpsText{ss.str(), *font, 20};
     if (this->q < 0) {
         fpsText.setPosition(this->p.x + 1, this->p.y - 10);
-    } else if(this->q > 0) {
+    } else if (this->q > 0) {
         fpsText.setPosition(this->p.x - 1, this->p.y - 7);
     }
     fpsText.setFillColor(sf::Color::White);
     window->draw(fpsText);
-}
-
-const sf::Vector2<fpt> &ChargedParticle::getP() const {
-    return p;
 }

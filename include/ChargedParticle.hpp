@@ -31,11 +31,14 @@ public:
 
     [[nodiscard]] sf::Vector2<fpt> coulombForce(const std::vector<ChargedParticle> &particles) const;
 
+    [[nodiscard]] inline sf::Vector2<fpt> electricalField(const sf::Vector2<fpt>&vector) const {
+        auto diff = this->p - vector;
+        return (diff / std::pow(norm(diff), 3)) * (this->q / (4 * PI * COULOMB_CONSTANT));
+    }
+
     void updatePosition(const sf::Vector2<fpt>& coulomb, fpt deltaT);
 
     void draw(sf::RenderWindow * window);
-
-    const sf::Vector2<fpt> &getP() const;
 
     bool operator==(const ChargedParticle &rhs) const;
 
