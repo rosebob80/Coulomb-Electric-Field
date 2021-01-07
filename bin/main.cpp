@@ -4,7 +4,7 @@
 #include <Field.hpp>
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Probe  Ladung", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Probeladung", sf::Style::Default);
     window.setFramerateLimit(30);
 
     tgui::GuiSFML gui{window};
@@ -15,8 +15,8 @@ int main() {
     Config config{
     };
 
-    //Graph graph(&arial, &window, &gui, &config);
+    Field field(&arial, &window, &config, &gui);
     while (window.isOpen()) {
-        //graph.update();
+        field.update();
     }
 }
