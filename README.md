@@ -4,12 +4,26 @@ electrical field. The physics and maths were derived from Columb's law (which is
 ![](data/output.gif)
 
 ### Usage
+Install dependencies
+```
+sudo apt install libeigen3-dev libsfml-dev -y
+```
+
+Install TGUI:
+```
+git clone https://github.com/texus/TGUI.git --depth 1
+cd TGUI
+mkdir build
+cd build
+cmake ..
+sudo make install -j8
+```
 
 Clone and compile the program
 
 ```
-git clone git@github.com:longuyen97/electric-field.git
-cd electric-field
+git clone https://github.com/longmakesstuff/Coulomb-Electric-Field.git --depth 1
+cd Coulomb-Electric-Field
 mkdir build
 cd build
 cmake ..
